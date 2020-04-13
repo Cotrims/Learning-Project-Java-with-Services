@@ -36,6 +36,34 @@ public class Vendedores
         return retorno;
     }
 
+    public static boolean cadastrado (String cpf) throws Exception
+    {
+        boolean retorno = false;
+
+        try
+        {
+            String sql;
+
+            sql = "SELECT * " +
+                    "FROM VENDEDORES " +
+                    "WHERE CPF = ?";
+
+            BDSQLServer.COMANDO.prepareStatement (sql);
+
+            BDSQLServer.COMANDO.setString(1, cpf);
+
+            MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
+
+            retorno = resultado.first(); // pode-se usar resultado.last() ou resultado.next() ou resultado.previous() ou resultado.absotule(numeroDaLinha)
+        }
+        catch (SQLException erro)
+        {
+            throw new Exception ("Erro ao procurar vendedor");
+        }
+
+        return retorno;
+    }
+
     public static void incluir (Vendedor vendedor) throws Exception
     {
         if (vendedor==null)
@@ -74,14 +102,14 @@ public class Vendedores
 
     public static void excluir (int id) throws Exception
     {
-        if (cadastrado(id))
+        if (!cadastrado(id))
             throw new Exception ("Nao cadastrado");
 
         try
         {
             String sql;
 
-            sql = "DELETE FROM FORNECEDOR " +
+            sql = "DELETE FROM VENDEDORES " +
                     "WHERE ID=?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
@@ -101,10 +129,10 @@ public class Vendedores
     public static void alterar (Vendedor vendedor) throws Exception
     {
         if (vendedor==null)
-            throw new Exception ("Fornecedor nao fornecido");
+            throw new Exception ("Vendedos nao fornecido");
 
-        if (cadastrado(vendedor.getId()))
-            throw new Exception ("Nao cadastrado");
+        if (!cadastrado(vendedor.getId()))
+            throw new Exception ("Nao cadastrado" + vendedor.getId());
 
         try
         {
@@ -114,10 +142,10 @@ public class Vendedores
                     "SET NOME=?, " +
                     "EMAIL=?, " +
                     "TELEFONE=?, " +
-                    "CNPJ=? " +
-                    "STATUSFORNECEDOR=? " +
-                    "CEP=? " +
-                    "NUMERO=? " +
+                    "CPF=?, " +
+                    "PRODUTO=?, " +
+                    "CEP=?, " +
+                    "NUMERO=?," +
                     "COMPLEMENTO=? " +
                     "WHERE ID = ?";
 

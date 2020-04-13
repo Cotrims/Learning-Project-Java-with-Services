@@ -31,7 +31,7 @@ public class Vendedor implements Cloneable
 
     public void setCep(int cep) throws Exception
     {
-        if (cep < 10000000) throw new Exception("Cep inválido");
+        if (cep < 0) throw new Exception("Cep invalido");
         this.cep = cep;
     }
 
