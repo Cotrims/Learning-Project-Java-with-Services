@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="postgresql4225">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/postgresql4225.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

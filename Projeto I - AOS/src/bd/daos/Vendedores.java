@@ -5,9 +5,22 @@ import bd.*;
 import bd.dbos.*;
 import bd.core.MeuResultSet;
 
+/**
+ * A classe Vendedores é a camada lógica da classe vendedor.
+ * É ela a responssável por realizar os métodos de CRUD no bando
+ * de dados, retornando instancias da classe Vendedor.
+ * @author Vinícius Martins Cotrim
+ * @since 2020
+ */
 public class Vendedores
 {
 
+    /**
+     * Verifica a existência de um vendendor no banco de dados, buscando pelo seu id
+     * @param id O id do vendedor a ser verificado
+     * @return Um boolean indicando a existência do vendendor
+     * @throws Exception Caso ocorra erros na consulta
+     */
     public static boolean cadastrado (int id) throws Exception
     {
         boolean retorno = false;
@@ -36,6 +49,12 @@ public class Vendedores
         return retorno;
     }
 
+    /**
+     * Verifica a existência de um vendendor no banco de dados, buscando pelo seu cpf
+     * @param cpf O cpf do vendedor a ser verificado
+     * @return Um boolean indicando a existência do vendendor
+     * @throws Exception Caso ocorra erros na consulta
+     */
     public static boolean cadastrado (String cpf) throws Exception
     {
         boolean retorno = false;
@@ -64,6 +83,12 @@ public class Vendedores
         return retorno;
     }
 
+    /**
+     * Incluir um novo vendedor no bando de dados.
+     * @param vendedor Uma instancia da classe Vendedor
+     * @throws Exception Caso o vendedor passado como parâmetro seja nulo
+     * ou ocorra algum erro na coxeção com o banco de dados.
+     */
     public static void incluir (Vendedor vendedor) throws Exception
     {
         if (vendedor==null)
@@ -100,6 +125,13 @@ public class Vendedores
         }
     }
 
+    /**
+     * Exclui um vendedos no bando de dados, atravaz do id passado
+     * como parâmetro.
+     * @param id
+     * @throws Exception Caso nao exista vendedores com o id passado, ou caso algum
+     * erro ocorra na conexão com o banco.
+     */
     public static void excluir (int id) throws Exception
     {
         if (!cadastrado(id))
@@ -126,6 +158,12 @@ public class Vendedores
         }
     }
 
+    /**
+     * Altera um vendedor já existente no banco de dados.
+     * @param vendedor Um vendedor que contenha as novas informações
+     * @throws Exception Caso o vendedor passado seja nulo. Caso o vendedor não exista.
+     * Ou caso ocorra algum erro na conexão com o banco de dados.
+     */
     public static void alterar (Vendedor vendedor) throws Exception
     {
         if (vendedor==null)
@@ -170,6 +208,13 @@ public class Vendedores
         }
     }
 
+    /**
+     * Recupera um vendedor do banco de dados atraves do id passado como parâmetro
+     * @param id O id do vendedor a ser buscado
+     * @return Uma instância da classe vendedor, com os mesmos valores do vendedor
+     * no banco de dados.
+     * @throws Exception Caso ocorra algum erro de coneção na busca pelo vendedor.
+     */
     public static Vendedor getVendedor (int id) throws Exception
     {
         Vendedor vendedor = null;
@@ -209,6 +254,13 @@ public class Vendedores
         return vendedor;
     }
 
+    /**
+     * Recupera um vendedor do banco de dados atraves do cpf passado como parâmetro
+     * @param cpf O cpf do vendedor a ser buscado
+     * @return Uma instância da classe vendedor, com os mesmos valores do vendedor
+     * no banco de dados.
+     * @throws Exception Caso ocorra algum erro de coneção na busca pelo vendedor.
+     */
     public static Vendedor getVendedor (String cpf) throws Exception
     {
         Vendedor vendedor = null;
@@ -248,6 +300,11 @@ public class Vendedores
         return vendedor;
     }
 
+    /**
+     * Busca e retorna todos os vendedores presentes no bando de dados
+     * @return Um instância da classe MeuResultSet contendo todos os vendedores
+     * @throws Exception Caso ocorra erros na busca ou na conexão.
+     */
     public static MeuResultSet getVendedores () throws Exception
     {
         MeuResultSet resultado = null;
